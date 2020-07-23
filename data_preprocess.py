@@ -28,8 +28,8 @@ you're
 """
 import nltk
 # 第一次运行需下载停用词表以及标点符号
-# nltk.download('stopwords')
-# nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('punkt')
 from nltk.corpus import stopwords
 
 stop_words = set(stopwords.words('english'))
