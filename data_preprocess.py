@@ -1,10 +1,12 @@
 """
 数据清洗、数据预处理
 """
-from string import punctuation
-
+import os
 import pandas as pd
+import nltk
 from nltk import word_tokenize, sent_tokenize
+from nltk.corpus import stopwords
+from string import punctuation
 
 """
 从csv文件读取数据，并将数据转化位DataFrame
@@ -14,24 +16,15 @@ train_data = pd.read_csv('bisai/train_release.csv').fillna('')
 test_data = pd.read_csv('bisai/test.csv').fillna('')
 
 """
-利用nltk包中的stopwords进行操作，其中stopwords去除英文中的一些停用词（i
-me
-my
-myself
-we
-our
-ours
-ourselves
-you
-you're
-）
+第一次运行需下载停用词表以及标点符号
+利用nltk包中的stopwords进行操作，其中stopwords去除英文中的一些停用词
+（i me my myself we our ours ourselves you you're）等
 """
-import nltk
 # 第一次运行需下载停用词表以及标点符号
-nltk.download('stopwords')
-nltk.download('punkt')
-from nltk.corpus import stopwords
-
+nltk_dir = os.path.dirname("$HOME/nltk_data")
+if not os.path.exists(nltk_dir):
+    nltk.download('stopwords')
+    nltk.download('punkt')
 stop_words = set(stopwords.words('english'))
 
 
@@ -94,4 +87,3 @@ print(len(test_data))
 candidate_data.to_hdf('cleaned2.h5', 'candidate_data')
 train_data.to_hdf('cleaned2.h5', 'train_data')
 test_data.to_hdf('cleaned2.h5', 'test_data')
-
