@@ -7,7 +7,7 @@ import pandas as pd
 from nltk import word_tokenize, sent_tokenize
 
 """
-从csv文件读取数据
+从csv文件读取数据，并将数据转化位DataFrame
 """
 candidate_data = pd.read_csv('bisai/candidate_paper_for_wsdm2020.csv').fillna('')
 train_data = pd.read_csv('bisai/train_release.csv').fillna('')
@@ -78,3 +78,20 @@ print(len(candidate_data))
 # 将文献中不包含摘要的文章去掉
 candidate_data = candidate_data[~candidate_data.abstract.str.contains('NO_CONTENT', regex=False)]
 print(len(candidate_data))
+
+# 对train数据进行处理，过滤description_text列包含NO_SITE的，
+print(len(train_data))
+train_data.description_text = train_data.description_text.apply(process_pubmed)
+train_data = train_data[~train_data.description_text.str.contains('NO_CITE', regex=False)]
+print(len(train_data))
+
+# 对test数据进行处理，过滤description_text列包含NO_SITE
+print(len(test_data))
+test_data.description_text = test_data.description_text.apply(process_pubmed)
+test_data = test_data[~test_data.description_text.str.contains('NO_CITE', regex=False)]
+print(len(test_data))
+
+candidate_data.to_hdf('cleaned2.h5', 'candidate_data')
+train_data.to_hdf('cleaned2.h5', 'train_data')
+test_data.to_hdf('cleaned2.h5', 'test_data')
+
