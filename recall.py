@@ -97,13 +97,13 @@ doc = candidate_data['title'] + '' + \
 all = pd.concat([doc, query])
 
 cnt_vectorizer = CountVectorizer().fit(all)
-cnt_all = cnt_vectorizer.transfrom(all)
+cnt_all = cnt_vectorizer.transform(all)
 bm25 = BM25Transformer().fit(cnt_all)
 
-cnt_query = cnt_vectorizer.transfrom(query)
+cnt_query = cnt_vectorizer.transform(query)
 bm25_query = bm25.transform(cnt_query)
 
-cnt_doc = cnt_vectorizer.transfrom(doc)
+cnt_doc = cnt_vectorizer.transform(doc)
 bm25_doc = bm25.transform(cnt_doc)
 
 
