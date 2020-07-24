@@ -21,7 +21,8 @@ test_data = pd.read_csv('bisai/test.csv').fillna('')
 （i me my myself we our ours ourselves you you're）等
 """
 # 第一次运行需下载停用词表以及标点符号
-nltk_dir = os.path.dirname("$HOME/nltk_data")
+home_dir = os.environ['HOME']
+nltk_dir = os.path.join(home_dir, 'nltk_data')
 if not os.path.exists(nltk_dir):
     nltk.download('stopwords')
     nltk.download('punkt')
