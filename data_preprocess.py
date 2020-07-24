@@ -19,8 +19,7 @@ test_data = pd.read_csv('bisai/test.csv').fillna('')
 利用nltk包中的stopwords进行操作，其中stopwords去除英文中的一些停用词
 （i me my myself we our ours ourselves you you're）等
 """
-home_dir = os.environ['HOME']
-nltk_dir = os.path.join(home_dir, 'nltk_data')
+nltk_dir = os.path.dirname("$HOME/nltk_data")
 if not os.path.exists(nltk_dir):
     nltk.download('stopwords')
     nltk.download('punkt')
