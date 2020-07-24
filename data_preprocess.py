@@ -14,13 +14,13 @@ from string import punctuation
 candidate_data = pd.read_csv('bisai/candidate_paper_for_wsdm2020.csv').fillna('')
 train_data = pd.read_csv('bisai/train_release.csv').fillna('')
 test_data = pd.read_csv('bisai/test.csv').fillna('')
-
 """
 第一次运行需下载停用词表以及标点符号
 利用nltk包中的stopwords进行操作，其中stopwords去除英文中的一些停用词
 （i me my myself we our ours ourselves you you're）等
 """
-nltk_dir = os.path.dirname("$HOME/nltk_data")
+home_dir = os.environ['HOME']
+nltk_dir = os.path.join(home_dir, 'nltk_data')
 if not os.path.exists(nltk_dir):
     nltk.download('stopwords')
     nltk.download('punkt')
