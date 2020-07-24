@@ -14,7 +14,6 @@ from string import punctuation
 candidate_data = pd.read_csv('bisai/candidate_paper_for_wsdm2020.csv').fillna('')
 train_data = pd.read_csv('bisai/train_release.csv').fillna('')
 test_data = pd.read_csv('bisai/test.csv').fillna('')
-
 """
 第一次运行需下载停用词表以及标点符号
 利用nltk包中的stopwords进行操作，其中stopwords去除英文中的一些停用词
